@@ -93,7 +93,7 @@ try:
         value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] > int(value)]
     elif math == '<':
-    value = st.sidebar.text_input('enter value that you want to match: ')
+        value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] == int(value)]
 
     except Exception as e:
