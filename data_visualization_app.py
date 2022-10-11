@@ -59,7 +59,7 @@ except Exception as e:
 
     
 try:
-    group_by = st.sidebar.selectbox('Column', options=all_columns)
+    group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
   
     group_by_list = group_by.split()
     columns = list(df.columns)
@@ -70,18 +70,18 @@ try:
 
 except Exception as e:
     print(e)
-    st.write("Please upload file to the application. Error !")    
+    st.write("Please upload file to the application. Groupby Error !")    
     
 
 try:
-    math = st.sidebar.selectbox(label = 'Choose relation', options = ['<', '>', '=', '*'])
+    math = st.sidebar.selectbox(label = 'Choose relation', options = ['None','<', '>', '=', '*'])
     column_name = st.sidebar.selectbox('Column', options=all_columns)
 
     if math == '*':
         value1 = st.sidebar.text_input('enter upper bound:')
         value2 = st.sidebar.text_input('enter lower bound: ')
         df = df[(df[column_name] < int(value1)) & (df[column_name] > int(value2))]
-    if math == '<':
+    elif math == '<':
         value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column_name] < int(value)]
     elif math == '>':
@@ -92,9 +92,8 @@ try:
         df = df[df[column_name] == int(value)]
 
 except Exception as e:
-    print(e)
-    st.write("Please upload file to the application. Error !")
-    
+    st.write(e)
+    st.write("Please upload file to the application. Condition Error !")
     
     
 
