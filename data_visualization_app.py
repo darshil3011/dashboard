@@ -43,7 +43,7 @@ except Exception as e:
 get_date = st.checkbox('Fetch date column')
 
 if get_date:
-    df['date'] = pd.to_datetime(data['date'])
+    df['date'] = pd.to_datetime(df['date'])
     df['month_ex'] = pd.DatetimeIndex(df[date]).month
     df['year_ex'] = pd.DatetimeIndex(df[date]).year
     df['date_ex'] = pd.DatetimeIndex(df[date]).day
