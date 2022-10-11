@@ -74,7 +74,7 @@ except Exception as e:
     
 
 try:
-    math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ', options = ['<', '>', '=', '*'])
+    math = st.sidebar.selectbox(label = 'Choose less then (<), greater than (>), equal to (=):, between (*) ', options = ['<', '>', '=', '*'])
     column = st.sidebar.selectbox('Column', options=all_columns)
 
     if math == '*':
