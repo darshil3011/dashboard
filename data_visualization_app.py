@@ -30,25 +30,22 @@ if uploaded_file is not None:
 global numeric_columns
 global non_numeric_columns
 try:
-    st.write(df)
-    numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
-    non_numeric_columns = list(df.select_dtypes(['object']).columns)
-    non_numeric_columns.append(None)
-    print(non_numeric_columns)
+    get_date = st.sidebar.checkbox('Fetch date column')
+    if get_date:
+        df['date'] = pd.to_datetime(df['date'])
+        df['month_ex'] = pd.DatetimeIndex(df['date']).month
+        df['year_ex'] = pd.DatetimeIndex(df['date']).year
+        df['date_ex'] = pd.DatetimeIndex(df['date']).day
+        df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M')
+        st.write(df.astype('object'))
+        numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+        non_numeric_columns = list(df.select_dtypes(['object']).columns)
+        non_numeric_columns.append(None)
+        print(non_numeric_columns)
 except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
-    
-get_date = st.checkbox('Fetch date column')
-
-if get_date:
-    df['date'] = pd.to_datetime(df['date'])
-    df['month_ex'] = pd.DatetimeIndex(df['date']).month
-    df['year_ex'] = pd.DatetimeIndex(df['date']).year
-    df['date_ex'] = pd.DatetimeIndex(df['date']).day
-    df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M')
-    st.write(df.astype('object'))
    
     
 # add a select widget to the side bar
