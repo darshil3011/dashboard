@@ -96,9 +96,9 @@ try:
         value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] == int(value)]
 
-    except Exception as e:
-        print(e)
-        st.write("Please upload file to the application. Error !")
+except Exception as e:
+    print(e)
+    st.write("Please upload file to the application. Error !")
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
