@@ -63,19 +63,16 @@ except Exception as e:
 try:
   group_by = st.sidebar.text_input('Group By :', 'column name')
   
-  if group_by != '':
-      group_by_list = group_by.split()
-      columns = list(df.columns)
-      columns.remove(group_by)
-      grouped_data = df.groupby(group_by_list)[columns].sum()
-      df = grouped_data.reset_index()
-      st.write(df.astype('object'))
-  else:
-      st.write(df.astype('object'))
+  group_by_list = group_by.split()
+  columns = list(df.columns)
+  columns.remove(group_by)
+  grouped_data = df.groupby(group_by_list)[columns].sum()
+  df = grouped_data.reset_index()
+  st.write(df.astype('object'))
       
 except Exception as e:
     print(e)
-    st.write("Please upload file to the application.")    
+    st.write("Please upload file to the application. Error !")    
     
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
