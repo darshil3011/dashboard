@@ -80,7 +80,7 @@ chart_select = st.sidebar.selectbox(
 
 try:
   math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
-	column = st.sidebar.selectbox('Column', options=all_columns)
+  column = st.sidebar.selectbox('Column', options=all_columns)
 	
   if math == '*':
 	    value1 = st.sidebar.text_input('enter upper bound:')
