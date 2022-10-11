@@ -97,7 +97,7 @@ if chart_select == 'Lineplots':
         x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
-        df = df.sort_values(by=y_values, ascending=False)
+        df = df.sort_values(by=x_values, ascending=False)
         plot = px.line(data_frame=df, x=x_values, y=y_values, color=color_value)
         st.plotly_chart(plot)
     except Exception as e:
