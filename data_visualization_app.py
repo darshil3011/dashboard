@@ -29,36 +29,50 @@ if uploaded_file is not None:
 
 global numeric_columns
 global non_numeric_columns
+global all_columns
 try:
-    #get_date = st.sidebar.checkbox('Fetch date column')
-    #if get_date:
-        #df['date'] = pd.to_datetime(df['date'])
-        #df['month_ex'] = pd.DatetimeIndex(df['date']).month
-        #df['year_ex'] = pd.DatetimeIndex(df['date']).year
-        #df['date_ex'] = pd.DatetimeIndex(df['date']).day
-        #df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M')
-        #st.write(df.astype('object'))
-        st.write(df)
+    get_date = st.sidebar.selectbox(
+    label="Split date ?",
+    options=['Yes', 'No'])
+    
+    if get_date == Yes:
+        df['date'] = pd.to_datetime(df['date'])
+        df['month_ex'] = pd.DatetimeIndex(df['date']).month
+        df['year_ex'] = pd.DatetimeIndex(df['date']).year
+        df['date_ex'] = pd.DatetimeIndex(df['date']).day
+        df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M') 
+        st.write(df.astype('object'))
+        all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
-        print(non_numeric_columns)
+       
+    else:
+        st.write(df.astype('object'))
+        numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+        non_numeric_columns = list(df.select_dtypes(['object']).columns)
+        non_numeric_columns.append(None)
+       
 except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
-#try:
-#  group_by = st.sidebar.text_input('Group By :', 'column name')
-#  group_by_list = group_by.split()
-#  columns = list(df.columns)
-#  columns.remove(group_by)
-#  grouped_data = df.groupby(group_by_list)[columns].sum()
-#  df = grouped_data.reset_index()
-#  st.write(df.astype('object'))
-   
-#except Exception as e:
-#    print(e)
-#    st.write("Please upload file to the application.")    
+try:
+  group_by = st.sidebar.text_input('Group By :', 'column name')
+  
+  if group_by != '':
+      group_by_list = group_by.split()
+      columns = list(df.columns)
+      columns.remove(group_by)
+      grouped_data = df.groupby(group_by_list)[columns].sum()
+      df = grouped_data.reset_index()
+      st.write(df.astype('object'))
+  else:
+      st.write(df.astype('object'))
+      
+except Exception as e:
+    print(e)
+    st.write("Please upload file to the application.")    
     
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
@@ -70,7 +84,7 @@ chart_select = st.sidebar.selectbox(
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
     try:
-        x_values = st.sidebar.selectbox('X axis', options=numeric_columns)
+        x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.scatter(data_frame=df, x=x_values, y=y_values, color=color_value)
@@ -82,7 +96,7 @@ if chart_select == 'Scatterplots':
 if chart_select == 'Lineplots':
     st.sidebar.subheader("Line Plot Settings")
     try:
-        x_values = st.sidebar.selectbox('X axis', options=non_numeric_columns)
+        x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.line(data_frame=df, x=x_values, y=y_values, color=color_value)
@@ -106,7 +120,7 @@ if chart_select == 'Boxplot':
     st.sidebar.subheader("Boxplot Settings")
     try:
         y = st.sidebar.selectbox("Y axis", options=numeric_columns)
-        x = st.sidebar.selectbox("X axis", options=non_numeric_columns)
+        x = st.sidebar.selectbox("X axis", options=all_columns)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.box(data_frame=df, y=y, x=x, color=color_value)
         st.plotly_chart(plot)
