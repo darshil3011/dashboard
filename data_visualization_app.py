@@ -74,22 +74,22 @@ except Exception as e:
     
 
 try:
-    math = st.sidebar.selectbox(label = 'Choose less then (<), greater than (>), equal to (=):, between (*) ', options = ['<', '>', '=', '*'])
-    column = st.sidebar.selectbox('Column', options=all_columns)
+    math = st.sidebar.selectbox(label = 'Choose relation', options = ['<', '>', '=', '*'])
+    column_name = st.sidebar.selectbox('Column', options=all_columns)
 
     if math == '*':
         value1 = st.sidebar.text_input('enter upper bound:')
         value2 = st.sidebar.text_input('enter lower bound: ')
-        df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
+        df = df[(df[column_name] < int(value1)) & (df[column_name] > int(value2))]
     if math == '<':
         value = st.sidebar.text_input('enter value that you want to match: ')
-        df = df[df[column] < int(value)]
+        df = df[df[column_name] < int(value)]
     elif math == '>':
         value = st.sidebar.text_input('enter value that you want to match: ')
-        df = df[df[column] > int(value)]
-    elif math == '<':
+        df = df[df[column_name] > int(value)]
+    elif math == '=':
         value = st.sidebar.text_input('enter value that you want to match: ')
-        df = df[df[column] == int(value)]
+        df = df[df[column_name] == int(value)]
 
 except Exception as e:
     print(e)
