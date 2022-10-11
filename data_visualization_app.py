@@ -79,10 +79,10 @@ chart_select = st.sidebar.selectbox(
 )
 
 try:
-  math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
-  column = st.sidebar.selectbox('Column', options=all_columns)
+  	math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
+  	column = st.sidebar.selectbox('Column', options=all_columns)
 	
-  if math == '*':
+	if math == '*':
 	    value1 = st.sidebar.text_input('enter upper bound:')
 	    value2 = st.sidebar.text_input('enter lower bound: ')
 	    df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
