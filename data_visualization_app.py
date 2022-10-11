@@ -39,11 +39,23 @@ except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
+    
+get_date = st.checkbox('Fetch date column')
+
+if get_date:
+    df['date'] = pd.to_datetime(data[date])
+    df['month_ex'] = pd.DatetimeIndex(df[date]).month
+    df['year_ex'] = pd.DatetimeIndex(df[date]).year
+    df['date_ex'] = pd.DatetimeIndex(df[date]).day
+    df['month_year_ex'] = pd.to_datetime(df[date]).dt.to_period('M')
+   
+    
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
     options=['Scatterplots', 'Lineplots', 'Histogram', 'Boxplot']
 )
+
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
