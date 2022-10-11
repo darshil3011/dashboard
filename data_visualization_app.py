@@ -87,13 +87,13 @@ try:
         value2 = st.sidebar.text_input('enter lower bound: ')
         df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
     if math == '<':
-        value = st.sidebar.text_input('enter value that you want to match: '))
+        value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] < int(value)]
     elif math == '>':
-        value = st.sidebar.text_input('enter value that you want to match: '))
+        value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] > int(value)]
     elif math == '<':
-    value = st.sidebar.text_input('enter value that you want to match: '))
+    value = st.sidebar.text_input('enter value that you want to match: ')
         df = df[df[column] == int(value)]
 
     except Exception as e:
