@@ -48,6 +48,7 @@ if get_date:
     df['year_ex'] = pd.DatetimeIndex(df['date']).year
     df['date_ex'] = pd.DatetimeIndex(df['date']).day
     df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M')
+    st.write(df)
    
     
 # add a select widget to the side bar
