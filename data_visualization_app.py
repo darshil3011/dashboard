@@ -28,6 +28,7 @@ if uploaded_file is not None:
 global numeric_columns
 global non_numeric_columns
 global all_columns
+all_columns = []
 
 try:
     get_date = st.sidebar.selectbox(
