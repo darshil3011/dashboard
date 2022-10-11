@@ -59,14 +59,16 @@ except Exception as e:
 
     
 try:
-    group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
-  
-    group_by_list = group_by.split()
-    columns = list(df.columns)
-    columns.remove(group_by)
-    grouped_data = df.groupby(group_by_list)[columns].sum()
-    df = grouped_data.reset_index()
-    st.write(df.astype('object'))
+    group_by_boolean = st.checkbox('Perform Groupby')
+    if group_by_boolean:
+        group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
+
+        group_by_list = group_by.split()
+        columns = list(df.columns)
+        columns.remove(group_by)
+        grouped_data = df.groupby(group_by_list)[columns].sum()
+        df = grouped_data.reset_index()
+        st.write(df.astype('object'))
 
 except Exception as e:
     print(e)
