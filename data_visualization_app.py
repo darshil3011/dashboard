@@ -33,7 +33,7 @@ global all_columns
 try:
     get_date = st.sidebar.selectbox(
     label="Split date ?",
-    options=['Yes', 'No'])
+    options=['None', 'Yes', 'No'])
     
     if get_date == Yes:
         df['date'] = pd.to_datetime(df['date'])
@@ -47,11 +47,14 @@ try:
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
        
-    else:
+    elif get_date == No:
         st.write(df.astype('object'))
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
+    
+    else:
+        st.write("Select fetch date option")
        
 except Exception as e:
     print(e)
