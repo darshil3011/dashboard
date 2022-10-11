@@ -59,7 +59,7 @@ except Exception as e:
     st.write("Please upload file to the application.")
 
 try:
-  group_by = st.sidebar.text_input('Group By :', 'column name')
+  group_by = st.sidebar.selectbox('Column', options=all_columns)
   
   group_by_list = group_by.split()
   columns = list(df.columns)
@@ -78,6 +78,25 @@ chart_select = st.sidebar.selectbox(
     options=['Scatterplots', 'Lineplots', 'Histogram', 'Boxplot']
 )
 
+try:
+  math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
+	column = st.sidebar.selectbox('Column', options=all_columns)
+	
+  if math == '*':
+	    value1 = st.sidebar.text_input('enter upper bound:')
+	    value2 = st.sidebar.text_input('enter lower bound: ')
+	    df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
+	if math == '<':
+	    value = st.sidebar.text_input('enter value that you want to match: '))
+	    df = df[df[column] < int(value)]
+	elif math == '>':
+	    value = st.sidebar.text_input('enter value that you want to match: '))
+	    df = df[df[column] > int(value)]
+	elif math == '<':
+	    value = st.sidebar.text_input('enter value that you want to match: '))
+	    df = df[df[column] == int(value)]
+
+	return new_data
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
