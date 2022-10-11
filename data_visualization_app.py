@@ -18,8 +18,6 @@ uploaded_file = st.sidebar.file_uploader(
 
 global df
 if uploaded_file is not None:
-    print(uploaded_file)
-    print("hello")
 
     try:
         df = pd.read_csv(uploaded_file)
@@ -30,6 +28,7 @@ if uploaded_file is not None:
 global numeric_columns
 global non_numeric_columns
 global all_columns
+
 try:
     get_date = st.sidebar.selectbox(
     label="Split date ?",
@@ -58,6 +57,7 @@ except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
+    
 try:
     group_by = st.sidebar.selectbox('Column', options=all_columns)
   
@@ -72,14 +72,9 @@ except Exception as e:
     print(e)
     st.write("Please upload file to the application. Error !")    
     
-# add a select widget to the side bar
-chart_select = st.sidebar.selectbox(
-    label="Select the chart type",
-    options=['Scatterplots', 'Lineplots', 'Histogram', 'Boxplot']
-)
 
 try:
-    math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
+    math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ', options = ['<', '>', '=', '*'])
     column = st.sidebar.selectbox('Column', options=all_columns)
 
     if math == '*':
@@ -99,6 +94,16 @@ try:
 except Exception as e:
     print(e)
     st.write("Please upload file to the application. Error !")
+    
+    
+    
+
+# add a select widget to the side bar
+chart_select = st.sidebar.selectbox(
+    label="Select the chart type",
+    options=['Scatterplots', 'Lineplots', 'Histogram', 'Boxplot']
+)
+
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
