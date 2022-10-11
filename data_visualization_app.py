@@ -53,21 +53,21 @@ try:
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
-       
+
 except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
 try:
-  group_by = st.sidebar.selectbox('Column', options=all_columns)
+    group_by = st.sidebar.selectbox('Column', options=all_columns)
   
-  group_by_list = group_by.split()
-  columns = list(df.columns)
-  columns.remove(group_by)
-  grouped_data = df.groupby(group_by_list)[columns].sum()
-  df = grouped_data.reset_index()
-  st.write(df.astype('object'))
-      
+    group_by_list = group_by.split()
+    columns = list(df.columns)
+    columns.remove(group_by)
+    grouped_data = df.groupby(group_by_list)[columns].sum()
+    df = grouped_data.reset_index()
+    st.write(df.astype('object'))
+
 except Exception as e:
     print(e)
     st.write("Please upload file to the application. Error !")    
@@ -79,27 +79,27 @@ chart_select = st.sidebar.selectbox(
 )
 
 try:
-  math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
-  column = st.sidebar.selectbox('Column', options=all_columns)
+    math = st.sidebar.selectbox('Choose less then (<), greater than (>), equal to (=):, between (*) ')
+    column = st.sidebar.selectbox('Column', options=all_columns)
 
-  if math == '*':
-  	value1 = st.sidebar.text_input('enter upper bound:')
-    	value2 = st.sidebar.text_input('enter lower bound: ')
-    	df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
-  if math == '<':
-    	value = st.sidebar.text_input('enter value that you want to match: '))
-    	df = df[df[column] < int(value)]
-  elif math == '>':
-    	value = st.sidebar.text_input('enter value that you want to match: '))
-    	df = df[df[column] > int(value)]
-  elif math == '<':
-   	value = st.sidebar.text_input('enter value that you want to match: '))
-    	df = df[df[column] == int(value)]
+    if math == '*':
+        value1 = st.sidebar.text_input('enter upper bound:')
+        value2 = st.sidebar.text_input('enter lower bound: ')
+        df = df[(df[column] < int(value1)) & (df[column] > int(value2))]
+    if math == '<':
+        value = st.sidebar.text_input('enter value that you want to match: '))
+        df = df[df[column] < int(value)]
+    elif math == '>':
+        value = st.sidebar.text_input('enter value that you want to match: '))
+        df = df[df[column] > int(value)]
+    elif math == '<':
+    value = st.sidebar.text_input('enter value that you want to match: '))
+        df = df[df[column] == int(value)]
 
-  except Exception as e:
-	print(e)
-	st.write("Please upload file to the application. Error !")
-	
+    except Exception as e:
+    print(e)
+    st.write("Please upload file to the application. Error !")
+
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
     try:
