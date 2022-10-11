@@ -35,7 +35,7 @@ try:
     label="Split date ?",
     options=['None', 'Yes', 'No'])
     
-    if get_date == Yes:
+    if get_date == 'Yes':
         df['date'] = pd.to_datetime(df['date'])
         df['month_ex'] = pd.DatetimeIndex(df['date']).month
         df['year_ex'] = pd.DatetimeIndex(df['date']).year
@@ -46,15 +46,13 @@ try:
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
-       
-    elif get_date == No:
+    
+    if get_date == 'No':
         st.write(df.astype('object'))
+        all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
-    
-    else:
-        st.write("Select fetch date option")
        
 except Exception as e:
     print(e)
