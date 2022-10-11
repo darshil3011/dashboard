@@ -66,7 +66,7 @@ try:
     columns.remove(group_by)
     grouped_data = df.groupby(group_by_list)[columns].sum()
     df = grouped_data.reset_index()
-    #st.write(df.astype('object'))
+    st.write(df.astype('object'))
 
 except Exception as e:
     print(e)
@@ -89,10 +89,10 @@ try:
         df = df[df[column_name] > int(value)]
     elif math == '=':
         value = st.sidebar.text_input('enter value that you want to match: ')
-        try:
-            df = df[df[column_name] == value]
-        except:
+        if column_name in numeric_columns:
             df = df[df[column_name] == int(value)]
+        elif column_name in non_numeric_columns:
+            df = df[df[column_name] == str(value)]
             
 except Exception as e:
     st.write(e)
