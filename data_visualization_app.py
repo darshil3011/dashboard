@@ -6,7 +6,8 @@ import pandas as pd
 st.set_option('deprecation.showfileUploaderEncoding', False)
 
 # title of the app
-st.title("Data Visualization App")
+st.title("Think In Graphs - Dashboard")
+st.subheader('Powered by Think In Bytes')
 
 # Add a sidebar
 st.sidebar.subheader("Visualization Settings")
