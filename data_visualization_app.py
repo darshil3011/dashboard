@@ -106,7 +106,7 @@ except Exception as e:
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
-    options=['Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot']
+    options=['Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
 )
 
 
@@ -149,9 +149,9 @@ if chart_select == 'Histogram':
 if chart_select == 'Funnel':
     st.sidebar.subheader("Funnel Settings")
     try:
-        x = st.sidebar.selectbox('Feature', options=numeric_columns)
-        y = st.sidebar.selectbox('Feature', options=non_numeric_columns)
-        plot = px.funnel(data, x=x, y=y)
+        x = st.sidebar.selectbox('X axis', options=numeric_columns)
+        y = st.sidebar.selectbox('Y axis', options=non_numeric_columns)
+        plot = px.funnel(data=df, x=x, y=y)
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
@@ -163,6 +163,17 @@ if chart_select == 'Boxplot':
         x = st.sidebar.selectbox("X axis", options=all_columns)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.box(data_frame=df, y=y, x=x, color=color_value)
+        st.plotly_chart(plot)
+    except Exception as e:
+        print(e)
+        
+if chart_select == 'Gantt':
+    st.sidebar.subheader("Funnel Settings")
+    try:
+        x_start = st.sidebar.selectbox('start date', options=numeric_columns)
+        x_end = st.sidebar.selectbox('end date', options=non_numeric_columns)
+        task = st.sidebar.selectbox('Tasks', options=numeric_columns)
+        plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
