@@ -150,7 +150,7 @@ if chart_select == 'Funnel':
     st.sidebar.subheader("Funnel Settings")
     try:
         x = st.sidebar.selectbox('Feature', options=numeric_columns)
-        y = st.sidebar.selectbox('Feature', options=non_numeric_columns
+        y = st.sidebar.selectbox('Feature', options=non_numeric_columns)
         plot = px.funnel(data, x=x, y=y)
         st.plotly_chart(plot)
     except Exception as e:
