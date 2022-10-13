@@ -106,7 +106,7 @@ except Exception as e:
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
-    options=['Scatterplots', 'Lineplots', 'Histogram', 'Boxplot']
+    options=['Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot']
 )
 
 
@@ -142,6 +142,16 @@ if chart_select == 'Histogram':
                                      max_value=100, value=40)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.histogram(x=x, data_frame=df, color=color_value)
+        st.plotly_chart(plot)
+    except Exception as e:
+        print(e)
+        
+if chart_select == 'Funnel':
+    st.sidebar.subheader("Funnel Settings")
+    try:
+        x = st.sidebar.selectbox('Feature', options=numeric_columns)
+        y = st.sidebar.selectbox('Feature', options=non_numeric_columns
+        plot = px.funnel(data, x=x, y=y)
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
