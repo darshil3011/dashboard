@@ -171,7 +171,9 @@ if chart_select == 'Gantt':
     st.sidebar.subheader("Funnel Settings")
     try:
         x_start = st.sidebar.selectbox('start date', options=all_columns)
+        df[x_start] = pd.to_datetime(df[x_start])
         x_end = st.sidebar.selectbox('end date', options=all_columns)
+        df[x_end] = pd.to_datetime(df[x_end])
         task = st.sidebar.selectbox('Tasks', options=all_columns)
         plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
         st.plotly_chart(plot)
