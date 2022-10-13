@@ -151,7 +151,7 @@ if chart_select == 'Funnel':
     try:
         x = st.sidebar.selectbox('X axis', options=numeric_columns)
         y = st.sidebar.selectbox('Y axis', options=non_numeric_columns)
-        plot = px.funnel(data=df, x=x, y=y)
+        plot = px.funnel(df, x=x, y=y)
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
@@ -170,9 +170,9 @@ if chart_select == 'Boxplot':
 if chart_select == 'Gantt':
     st.sidebar.subheader("Funnel Settings")
     try:
-        x_start = st.sidebar.selectbox('start date', options=numeric_columns)
-        x_end = st.sidebar.selectbox('end date', options=non_numeric_columns)
-        task = st.sidebar.selectbox('Tasks', options=numeric_columns)
+        x_start = st.sidebar.selectbox('start date', options=all_columns)
+        x_end = st.sidebar.selectbox('end date', options=all_columns)
+        task = st.sidebar.selectbox('Tasks', options=all_columns)
         plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
         st.plotly_chart(plot)
     except Exception as e:
