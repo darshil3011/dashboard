@@ -93,38 +93,52 @@ try:
     if math == '*':
         value1 = st.sidebar.text_input('enter upper bound:')
         value2 = st.sidebar.text_input('enter lower bound: ')
-        df = df[(df[column_name] < int(value1)) & (df[column_name] > int(value2))]
+        df = df[(df[column_name] < float(value1)) & (df[column_name] > float(value2))]
+        placeholder.dataframe(df.astype('object'))
     elif math == '<':
         value = st.sidebar.text_input('enter upper limit: ')
-        df = df[df[column_name] < int(value)]
+        df = df[df[column_name] < float(value)]
+        placeholder.dataframe(df.astype('object'))
     elif math == '>':
         value = st.sidebar.text_input('enter lower limit: ')
-        df = df[df[column_name] > int(value)]
+        df = df[df[column_name] > float(value)]
+        placeholder.dataframe(df.astype('object'))
     elif math == '=':
         value = st.sidebar.text_input('enter value that you want to match: ')
         if column_name in numeric_columns:
-            df = df[df[column_name] == int(value)]
+            df = df[df[column_name] == float(value)]
+            placeholder.dataframe(df.astype('object'))
         elif column_name in non_numeric_columns:
             df = df[df[column_name] == str(value)]
+            placeholder.dataframe(df.astype('object'))
             
 except Exception as e:
     st.write(e)
     st.write("Please upload file to the application. Condition Error !")
     
     
-
+st.sidebar.subheader("Data visualisation")
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
-    options=['Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
+    options=['Select chart','Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
 )
 
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
     st.subheader("Scatterplot")
-    st.markdown("Find out how scattered is your data. Choose a categorical feature on X axis and data you want to visualise on Y axis")
-    st.markdown("Ideal for visualizing sales volume, website traffic etc")
+    
+    st.markdown("A scatter plot (aka scatter chart, scatter graph) uses dots to represent values for two different numeric variables. 
+                The position of each dot on the horizontal and vertical axis indicates values for an individual data point. 
+                Scatter plots are used to observe relationships between variables.")
+    
+    st.subheader("When to use scatterplots")            
+    st.markdown("A scatter plot can also be useful for identifying other patterns in data. 
+                We can divide data points into groups based on how closely sets of points cluster together. 
+                Scatter plots can also show if there are any unexpected gaps in the data and if there are any outlier points. ")
+    st.markdown("Ideal for : ML Data Analysis, Finding outliers, ")
+    
     try:
         x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
