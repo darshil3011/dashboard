@@ -15,7 +15,7 @@ st.sidebar.subheader("Control Panel")
 placeholder = st.empty()
 
 placeholder.subheader("Perform Data Analysis in few clicks")
-placeholder.markdown("**Step 1** Choose whether you want to split date into date, month and year for detailed analysis <br/> **Step 2** Filter data using conditions and limits. For eg, display products whose prices are between 1000 INR and 5000 INR <br/> **Step 3** Select chart type <br/> **Step 4** Choose relevant column features <br/> ** Begin with uploading a csv file **"
+placeholder.markdown("**Step 1** Choose whether you want to split date into date, month and year for detailed analysis <br/> **Step 2** Filter data using conditions and limits. For eg, display products whose prices are between 1000 INR and 5000 INR <br/> **Step 3** Select chart type <br/> **Step 4** Choose relevant column features <br/> ** Begin with uploading a csv file **")
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
