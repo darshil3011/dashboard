@@ -70,6 +70,8 @@ except Exception as e:
 try:
     group_by_boolean = st.sidebar.checkbox('Perform Groupby')
     if group_by_boolean:
+        all_columns = list(df.columns)
+        
         group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
 
         group_by_list = group_by.split()
