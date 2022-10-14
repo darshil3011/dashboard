@@ -48,11 +48,11 @@ try:
         df['year'] = pd.DatetimeIndex(df[date_column]).year
         df['day-date'] = pd.DatetimeIndex(df[date_column]).day
         df['month-year'] = pd.to_datetime(df[date_column]).dt.to_period('M') 
-        placeholder.dataframe(df.astype('object))
+        placeholder.dataframe(df.astype('object'))
         
     
     if get_date == 'No':
-        placeholder.dataframe(df.astype('object))
+        placeholder.dataframe(df.astype('object'))
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
