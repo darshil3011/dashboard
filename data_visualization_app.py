@@ -132,9 +132,7 @@ if chart_select == 'Scatterplots':
     st.markdown("A scatter plot uses dots to represent values for two different numeric variables. The position of each dot on the horizontal and vertical axis indicates values for an individual data point. Scatter plots are used to observe relationships between variables.")
     
     st.subheader("When to use scatterplots")            
-    st.markdown("A scatter plot can also be useful for identifying other patterns in data. 
-                We can divide data points into groups based on how closely sets of points cluster together. 
-                Scatter plots can also show if there are any unexpected gaps in the data and if there are any outlier points. ")
+    st.markdown("A scatter plot can also be useful for identifying other patterns in data. We can divide data points into groups based on how closely sets of points cluster together. Scatter plots can also show if there are any unexpected gaps in the data and if there are any outlier points. ")
     st.markdown("Ideal for : ML Data Analysis, Finding outliers, ")
     
     try:
