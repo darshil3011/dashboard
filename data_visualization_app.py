@@ -8,14 +8,14 @@ st.set_option('deprecation.showfileUploaderEncoding', False)
 
 # title of the app
 st.title("Think In Graphs - Dashboard")
-st.subheader('Powered by [Think In Bytes](https://www.thinkinbytes.in)')
+st.markdown('Powered by [Think In Bytes](https://www.thinkinbytes.in)')
 
 # Add a sidebar
 st.sidebar.subheader("Control Panel")
 
 placeholder = st.empty()
 image = Image.open('steps.png')
-placeholder.image(image, caption="steps")
+placeholder.image(image)
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
