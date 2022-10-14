@@ -14,7 +14,7 @@ st.subheader('Powered by [Think In Bytes](https://www.thinkinbytes.in)')
 st.sidebar.subheader("Control Panel")
 
 placeholder = st.empty()
-image = Image.open('Screenshot from 2022-10-14 15-29-55.png')
+image = Image.open('steps.png')
 placeholder.image(image, caption="steps")
 
 # Setup file upload
