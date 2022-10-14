@@ -73,7 +73,7 @@ try:
         columns.remove(group_by)
         grouped_data = df.groupby(group_by_list)[columns].sum()
         df = grouped_data.reset_index()
-        placeholder.dataframe(df.astype('object))
+        placeholder.dataframe(df.astype('object'))
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
