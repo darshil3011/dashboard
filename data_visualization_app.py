@@ -13,9 +13,8 @@ st.subheader('Powered by [Think In Bytes](https://www.thinkinbytes.in)')
 st.sidebar.subheader("Control Panel")
 
 placeholder = st.empty()
-
-placeholder.subheader("Perform Data Analysis in few clicks")
-placeholder.text("**Step 1** Choose whether you want to split date into date, month and year for detailed analysis \n **Step 2** Filter data using conditions and limits. For eg, display products whose prices are between 1000 INR and 5000 INR \n **Step 3** Select chart type \n **Step 4** Choose relevant column features \n ** Begin with uploading a csv file **")
+image = Image.open('steps.jpg')
+placeholder.image(image, caption="steps")
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
