@@ -37,16 +37,18 @@ try:
     options=['None', 'Yes', 'No'])
     
     if get_date == 'Yes':
-        df['date'] = pd.to_datetime(df['date'])
-        df['month_ex'] = pd.DatetimeIndex(df['date']).month
-        df['year_ex'] = pd.DatetimeIndex(df['date']).year
-        df['date_ex'] = pd.DatetimeIndex(df['date']).day
-        df['month_year_ex'] = pd.to_datetime(df['date']).dt.to_period('M') 
-        st.write(df.astype('object'))
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
         non_numeric_columns.append(None)
+        date_column = st.sidebar.selectbox(label="Split date ?",options=non_numeric_columns)
+        df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y')
+        df['month'] = pd.DatetimeIndex(df[date_column]).month
+        df['year'] = pd.DatetimeIndex(df[date_column]).year
+        df['day-date'] = pd.DatetimeIndex(df[date_column]).day
+        df['month-year'] = pd.to_datetime(df[date_column]).dt.to_period('M') 
+        st.write(df.astype('object'))
+        
     
     if get_date == 'No':
         st.write(df.astype('object'))
@@ -61,7 +63,7 @@ except Exception as e:
 
     
 try:
-    group_by_boolean = st.checkbox('Perform Groupby')
+    group_by_boolean = st.sidebar.checkbox('Perform Groupby')
     if group_by_boolean:
         group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
 
@@ -75,7 +77,8 @@ try:
 except Exception as e:
     print(e)
     st.write("Please upload file to the application. Groupby Error !")    
-    
+
+st.sidebar.subheader("Filter data by conditions")
 
 try:
     math = st.sidebar.selectbox(label = 'Choose relation', options = ['None','<', '>', '=', '*'])
@@ -86,10 +89,10 @@ try:
         value2 = st.sidebar.text_input('enter lower bound: ')
         df = df[(df[column_name] < int(value1)) & (df[column_name] > int(value2))]
     elif math == '<':
-        value = st.sidebar.text_input('enter value that you want to match: ')
+        value = st.sidebar.text_input('enter upper limit: ')
         df = df[df[column_name] < int(value)]
     elif math == '>':
-        value = st.sidebar.text_input('enter value that you want to match: ')
+        value = st.sidebar.text_input('enter lower limit: ')
         df = df[df[column_name] > int(value)]
     elif math == '=':
         value = st.sidebar.text_input('enter value that you want to match: ')
@@ -113,6 +116,9 @@ chart_select = st.sidebar.selectbox(
 
 if chart_select == 'Scatterplots':
     st.sidebar.subheader("Scatterplot Settings")
+    st.subheader("Scatterplot")
+    st.markdown("Find out how scattered is your data. Choose a categorical feature on X axis and data you want to visualise on Y axis")
+    st.markdown("Ideal for visualizing sales volume, website traffic etc")
     try:
         x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
