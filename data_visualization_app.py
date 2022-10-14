@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly_express as px
 import pandas as pd
+from PIL import Image
 
 # configuration
 st.set_option('deprecation.showfileUploaderEncoding', False)
