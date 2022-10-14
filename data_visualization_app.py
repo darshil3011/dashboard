@@ -30,6 +30,7 @@ global numeric_columns
 global non_numeric_columns
 global all_columns
 all_columns = []
+placeholder = st.empty()
 
 try:
     get_date = st.sidebar.selectbox(
@@ -47,11 +48,11 @@ try:
         df['year'] = pd.DatetimeIndex(df[date_column]).year
         df['day-date'] = pd.DatetimeIndex(df[date_column]).day
         df['month-year'] = pd.to_datetime(df[date_column]).dt.to_period('M') 
-        st.write(df.astype('object'))
+        placeholder.dataframe(df.astype('object))
         
     
     if get_date == 'No':
-        st.write(df.astype('object'))
+        placeholder.dataframe(df.astype('object))
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
