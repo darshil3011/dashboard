@@ -151,6 +151,14 @@ if chart_select == 'Scatterplots':
 
 if chart_select == 'Lineplots':
     st.sidebar.subheader("Line Plot Settings")
+    st.subheader("Line plot")
+    
+    st.markdown("A line graph is a type of chart or graph that is used to show information that changes over time. A line graph can be plotted using several points connected by straight lines.")
+    
+    st.subheader("When to use Lineplots")            
+    st.markdown("A line plot can be used to visualise financial commodities or instruments and observe their trend over time function.")
+    st.markdown("Ideal for : Time-series analyses, comparison of two quantities")
+    
     try:
         x_values = st.sidebar.selectbox('X axis', options=all_columns)
         y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
