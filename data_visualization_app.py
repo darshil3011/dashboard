@@ -10,7 +10,17 @@ st.title("Think In Graphs - Dashboard")
 st.subheader('Powered by [Think In Bytes](https://www.thinkinbytes.in)')
 
 # Add a sidebar
-st.sidebar.subheader("Visualization Settings")
+st.sidebar.subheader("Control Panel")
+
+placeholder = st.empty()
+
+placeholder.subheader("Perform Data Analysis in few clicks")
+placeholder.markdown("**Step 1** Choose whether you want to split date into date, month and year for detailed analysis")
+placeholder.markdown("**Step 2** Filter data using conditions and limits. For eg, display products whose prices are between 1000 INR and 5000 INR")
+placeholder.markdown("**Step 3** Select chart type")
+placeholder.markdown("**Step 4** Choose relevant column features")
+
+placeholder.markdown("** Begin with uploading a csv file **")
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
@@ -30,16 +40,6 @@ global numeric_columns
 global non_numeric_columns
 global all_columns
 all_columns = []
-placeholder = st.empty()
-
-placeholder.subheader("Perform Data Analysis in few clicks")
-placeholder.markdown("**Step 1** Choose whether you want to split date into date, month and year for detailed analysis")
-placeholder.markdown("**Step 2** Filter data using conditions and limits. For eg, display products whose prices are between 1000 INR and 5000 INR")
-placeholder.markdown("**Step 3** Select chart type")
-placeholder.markdown("**Step 4** Choose relevant column features")
-
-placeholder.markdown("** Begin with uploading a csv file **")
-
 
 try:
     get_date = st.sidebar.selectbox(
