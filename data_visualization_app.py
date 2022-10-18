@@ -75,40 +75,42 @@ st.sidebar.subheader("Filter data by conditions")
         
 
 try:
-    all_columns = list(df.columns)
-    numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
-    non_numeric_columns = list(df.select_dtypes(['object']).columns)
-    all_columns.insert(0, None)
-    numeric_columns.insert(0, None)
-    non_numeric_columns.insert(0, None)
-    math = st.sidebar.selectbox(label = 'Choose relation', options = ['None','<', '>', '=', '*'])
-    
+    filter_boolean = st.sidebar.checkbox('Perform Groupby')
+    if group_by_boolean:
+        all_columns = list(df.columns)
+        numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+        non_numeric_columns = list(df.select_dtypes(['object']).columns)
+        all_columns.insert(0, None)
+        numeric_columns.insert(0, None)
+        non_numeric_columns.insert(0, None)
+        math = st.sidebar.selectbox(label = 'Choose relation', options = ['None','<', '>', '=', '*'])
 
-    if math == '*':
-        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
-        value1 = st.sidebar.text_input('enter upper bound:')
-        value2 = st.sidebar.text_input('enter lower bound: ')
-        df = df[(df[column_name] < float(value1)) & (df[column_name] > float(value2))]
-        placeholder.dataframe(df.astype('object'))
-    elif math == '<':
-        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
-        value = st.sidebar.text_input('enter upper limit: ')
-        df = df[df[column_name] < float(value)]
-        placeholder.dataframe(df.astype('object'))
-    elif math == '>':
-        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
-        value = st.sidebar.text_input('enter lower limit: ')
-        df = df[df[column_name] > float(value)]
-        placeholder.dataframe(df.astype('object'))
-    elif math == '=':
-        column_name = st.sidebar.selectbox('Column', options=all_columns)
-        value = st.sidebar.text_input('enter value that you want to match: ')
-        if column_name in numeric_columns:
-            df = df[df[column_name] == float(value)]
+
+        if math == '*':
+            column_name = st.sidebar.selectbox('Column', options=numeric_columns)
+            value1 = st.sidebar.text_input('enter upper bound:')
+            value2 = st.sidebar.text_input('enter lower bound: ')
+            df = df[(df[column_name] < float(value1)) & (df[column_name] > float(value2))]
             placeholder.dataframe(df.astype('object'))
-        elif column_name in non_numeric_columns:
-            df = df[df[column_name] == str(value)]
+        elif math == '<':
+            column_name = st.sidebar.selectbox('Column', options=numeric_columns)
+            value = st.sidebar.text_input('enter upper limit: ')
+            df = df[df[column_name] < float(value)]
             placeholder.dataframe(df.astype('object'))
+        elif math == '>':
+            column_name = st.sidebar.selectbox('Column', options=numeric_columns)
+            value = st.sidebar.text_input('enter lower limit: ')
+            df = df[df[column_name] > float(value)]
+            placeholder.dataframe(df.astype('object'))
+        elif math == '=':
+            column_name = st.sidebar.selectbox('Column', options=all_columns)
+            value = st.sidebar.text_input('enter value that you want to match: ')
+            if column_name in numeric_columns:
+                df = df[df[column_name] == float(value)]
+                placeholder.dataframe(df.astype('object'))
+            elif column_name in non_numeric_columns:
+                df = df[df[column_name] == str(value)]
+                placeholder.dataframe(df.astype('object'))
             
 except Exception as e:
     st.error('Please choose appropriate columns. less than, greater than and between conditions can be used with numerical columns only. Use split date feature if you want to filter data using dates')
