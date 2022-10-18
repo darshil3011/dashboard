@@ -19,8 +19,8 @@ placeholder.image(image)
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
-                        label="Upload your CSV or Excel file. (200MB max)",
-                         type=['csv', 'xlsx'])
+                        label="Upload your CSV file. (200MB max)",
+                         type=['csv'])
 
 global df
 if uploaded_file is not None:
@@ -92,7 +92,7 @@ try:
         
 
 except Exception as e:
-    st.write("Please upload file to the application.")
+    st.write("Lets begin by uploading your data file (CSV). [Convert Data to CSV](https://convertio.co/xlsx-csv/)")
 
 #Filter Data     
 st.sidebar.subheader("Filter data by conditions")
@@ -291,4 +291,4 @@ if chart_select == 'Gantt':
     except Exception as e:
         print(e)
         
-st.sidebar.markdown('[Reset](https://thinkingraphs.streamlitapp.com/)')
+st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
