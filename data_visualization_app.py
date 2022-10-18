@@ -72,25 +72,36 @@ except Exception as e:
 
 #Filter Data     
 st.sidebar.subheader("Filter data by conditions")
+        
 
 try:
+    all_columns = list(df.columns)
+    numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+    non_numeric_columns = list(df.select_dtypes(['object']).columns)
+    all_columns.insert(0, None)
+    numeric_columns.insert(0, None)
+    non_numeric_columns.insert(0, None)
     math = st.sidebar.selectbox(label = 'Choose relation', options = ['None','<', '>', '=', '*'])
-    column_name = st.sidebar.selectbox('Column', options=all_columns)
+    
 
     if math == '*':
+        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
         value1 = st.sidebar.text_input('enter upper bound:')
         value2 = st.sidebar.text_input('enter lower bound: ')
         df = df[(df[column_name] < float(value1)) & (df[column_name] > float(value2))]
         placeholder.dataframe(df.astype('object'))
     elif math == '<':
+        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
         value = st.sidebar.text_input('enter upper limit: ')
         df = df[df[column_name] < float(value)]
         placeholder.dataframe(df.astype('object'))
     elif math == '>':
+        column_name = st.sidebar.selectbox('Column', options=numeric_columns)
         value = st.sidebar.text_input('enter lower limit: ')
         df = df[df[column_name] > float(value)]
         placeholder.dataframe(df.astype('object'))
     elif math == '=':
+        column_name = st.sidebar.selectbox('Column', options=all_columns)
         value = st.sidebar.text_input('enter value that you want to match: ')
         if column_name in numeric_columns:
             df = df[df[column_name] == float(value)]
