@@ -264,3 +264,5 @@ if chart_select == 'Gantt':
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
+        
+st.sidebar.markdown('[Reset](https://thinkingraphs.streamlitapp.com/)')
