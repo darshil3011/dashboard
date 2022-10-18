@@ -48,9 +48,9 @@ st.sidebar.subheader("Limit Dataframe")
 
 try:
     limit_boolean = st.sidebar.checkbox('Limit Data: ')
-    data_length = len(df)
                                         
     if limit_boolean:
+        data_length = len(df)
         limit_index = st.sidebar.slider('Limit data till row: ', 1, data_length, 1)
         df = df[0:limit_index]
 
