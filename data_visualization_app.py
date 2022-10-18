@@ -45,7 +45,9 @@ try:
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
-        non_numeric_columns.append(None)
+        all_columns.insert(0, 'None')
+        numeric_columns.insert(0, 'None')
+        non_numeric_columns.insert(0, 'None')
         date_column = st.sidebar.selectbox(label="Split date ?",options=non_numeric_columns)
         df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y')
         df['month'] = pd.DatetimeIndex(df[date_column]).month
@@ -60,36 +62,16 @@ try:
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
-        non_numeric_columns.append(None)
+        all_columns.insert(0, 'None')
+        numeric_columns.insert(0, 'None')
+        non_numeric_columns.insert(0, 'None')
+        
 
 except Exception as e:
     print(e)
     st.write("Please upload file to the application.")
 
-    
-try:
-    group_by_boolean = st.sidebar.checkbox('Perform Groupby')
-    if group_by_boolean:
-        all_columns = list(df.columns)
-        
-        group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
-
-        group_by_list = group_by.split()
-        columns = list(df.columns)
-        columns.remove(group_by)
-        grouped_data = df.groupby(group_by_list)[columns].sum()
-        df = grouped_data.reset_index()
-        placeholder.dataframe(df.astype('object'))
-        all_columns = list(df.columns)
-        numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
-        non_numeric_columns = list(df.select_dtypes(['object']).columns)
-        non_numeric_columns.append(None)
-        
-
-except Exception as e:
-    print(e)
-    st.write("Please upload file to the application. Groupby Error !")    
-
+#Filter Data     
 st.sidebar.subheader("Filter data by conditions")
 
 try:
@@ -121,8 +103,35 @@ try:
 except Exception as e:
     st.write(e)
     st.write("Please upload file to the application. Condition Error !")
-    
-    
+
+#Groupby    
+try:
+    group_by_boolean = st.sidebar.checkbox('Perform Groupby')
+    if group_by_boolean:
+        all_columns = list(df.columns)
+        
+        group_by = st.sidebar.selectbox('Group data by: ', options=all_columns)
+
+        group_by_list = group_by.split()
+        columns = list(df.columns)
+        columns.remove(group_by)
+        grouped_data = df.groupby(group_by_list)[columns].sum()
+        df = grouped_data.reset_index()
+        placeholder.dataframe(df.astype('object'))
+        all_columns = list(df.columns)
+        numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+        non_numeric_columns = list(df.select_dtypes(['object']).columns)
+        all_columns.insert(0, 'None')
+        numeric_columns.insert(0, 'None')
+        non_numeric_columns.insert(0, 'None')
+        
+        
+
+except Exception as e:
+    print(e)
+    st.write("Please upload file to the application. Groupby Error !")    
+
+#Data viz   
 st.sidebar.subheader("Data visualisation")
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
