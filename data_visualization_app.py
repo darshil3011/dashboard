@@ -27,8 +27,10 @@ if uploaded_file is not None:
 
     try:
         df = pd.read_csv(uploaded_file)
+        df = df.dropna()
         if len(df) > 1000:
-            st.error('Dataframe less than 1000 rows are supported in free version. For premium version, contact www.thinkinbytes.in')
+            st.error('Dataframe less than 1000 rows are supported in free version. Dataframe will be automatically sliced to first 1000 rows. For premium version, contact www.thinkinbytes.in')
+            df = df[0:1000]
     except Exception as e:
         st.error('Currently, we only support csv files. Please upload relevant file format !')
         df = pd.read_excel(uploaded_file)
@@ -38,7 +40,7 @@ global non_numeric_columns
 global all_columns
 all_columns = []
 
-df = df.dropna()
+
 
 #Select Data
 st.sidebar.subheader("Limit Dataframe")
@@ -49,7 +51,8 @@ try:
     data_length = len(df)
                                         
     if limit_boolean:
-        limit_index = st.slider('Limit data till row: ', 1, data_length, 1)
+        limit_index = st.sidebar.slider('Limit data till row: ', 1, data_length, 1)
+        df = df[0:limit_index]
 
 except Exception as e:
     st.write("Please select appropriate row number till which you want to limit your dataframe")
