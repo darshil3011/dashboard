@@ -45,9 +45,9 @@ try:
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
-        all_columns.insert(0, 'None')
-        numeric_columns.insert(0, 'None')
-        non_numeric_columns.insert(0, 'None')
+        all_columns.insert(0, None)
+        numeric_columns.insert(0, None)
+        non_numeric_columns.insert(0, None)
         date_column = st.sidebar.selectbox(label="Split date ?",options=non_numeric_columns)
         df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y')
         df['month'] = pd.DatetimeIndex(df[date_column]).month
