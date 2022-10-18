@@ -75,8 +75,8 @@ st.sidebar.subheader("Filter data by conditions")
         
 
 try:
-    filter_boolean = st.sidebar.checkbox('Perform Groupby')
-    if group_by_boolean:
+    filter_boolean = st.sidebar.checkbox('Perform Filter')
+    if filter_boolean:
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
@@ -118,6 +118,7 @@ except Exception as e:
 #Groupby    
 try:
     group_by_boolean = st.sidebar.checkbox('Perform Groupby')
+    
     if group_by_boolean:
         all_columns = list(df.columns)
         
