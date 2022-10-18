@@ -45,7 +45,7 @@ st.sidebar.subheader("Limit Dataframe")
 
 
 try:
-    limit_boolean = st.sidebar.checkbox('Limit Data: )
+    limit_boolean = st.sidebar.checkbox('Limit Data: ')
     data_length = len(df)
                                         
     if limit_boolean:
