@@ -28,7 +28,7 @@ if uploaded_file is not None:
     try:
         df = pd.read_csv(uploaded_file)
     except Exception as e:
-        print(e)
+        st.error('Currently, we only support csv files. Please upload relevant file format !', icon="🚨")
         df = pd.read_excel(uploaded_file)
 
 global numeric_columns
@@ -68,7 +68,6 @@ try:
         
 
 except Exception as e:
-    print(e)
     st.write("Please upload file to the application.")
 
 #Filter Data     
@@ -101,8 +100,7 @@ try:
             placeholder.dataframe(df.astype('object'))
             
 except Exception as e:
-    st.write(e)
-    st.write("Please upload file to the application. Condition Error !")
+    st.error('Please choose appropriate columns. less than, greater than and between conditions can be used with numerical columns only. Use split date feature if you want to filter data using dates', icon="🚨")
 
 #Groupby    
 try:
