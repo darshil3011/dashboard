@@ -49,8 +49,10 @@ try:
     data_length = len(df)
                                         
     if limit_boolean:
-        limit_index = st.slider('Limit data till row: ', 0, data_length, 1)
-                                        
+        limit_index = st.slider('Limit data till row: ', 1, data_length, 1)
+
+except Exception as e:
+    st.write("Please select appropriate row number till which you want to limit your dataframe")
 
 
 #Split Date
