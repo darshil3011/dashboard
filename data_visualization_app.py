@@ -27,6 +27,8 @@ if uploaded_file is not None:
 
     try:
         df = pd.read_csv(uploaded_file)
+        if len(df) > 1000:
+            st.error('Dataframe less than 1000 rows are supported in free version. For premium version, contact www.thinkinbytes.in')
     except Exception as e:
         st.error('Currently, we only support csv files. Please upload relevant file format !')
         df = pd.read_excel(uploaded_file)
@@ -36,12 +38,29 @@ global non_numeric_columns
 global all_columns
 all_columns = []
 
+df = df.dropna()
+
+#Select Data
+st.sidebar.subheader("Limit Dataframe")
+
+
 try:
-    get_date = st.sidebar.selectbox(
-    label="Split date ?",
-    options=['None', 'Yes', 'No'])
+    limit_boolean = st.sidebar.checkbox('Limit Data: )
+    data_length = len(df)
+                                        
+    if limit_boolean:
+        limit_index = st.slider('Limit data till row: ', 0, data_length, 1)
+                                        
+
+
+#Split Date
+st.sidebar.subheader("Split Date column")
+
+
+try:
+    date_boolean = st.sidebar.checkbox('Split Date: ')
     
-    if get_date == 'Yes':
+    if date_boolean:
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
         non_numeric_columns = list(df.select_dtypes(['object']).columns)
@@ -57,7 +76,7 @@ try:
         placeholder.dataframe(df.astype('object'))
         
     
-    if get_date == 'No':
+    else:
         placeholder.dataframe(df.astype('object'))
         all_columns = list(df.columns)
         numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
@@ -115,7 +134,10 @@ try:
 except Exception as e:
     st.error('Please choose appropriate columns. less than, greater than and between conditions can be used with numerical columns only. Use split date feature if you want to filter data using dates')
 
-#Groupby    
+#Groupby  
+st.sidebar.subheader("Group data by column")
+
+
 try:
     group_by_boolean = st.sidebar.checkbox('Perform Groupby')
     
