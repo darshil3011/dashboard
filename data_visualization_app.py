@@ -221,10 +221,17 @@ if chart_select == 'Lineplots':
 
 if chart_select == 'Histogram':
     st.sidebar.subheader("Histogram Settings")
+    st.subheader("Histogram")
+    
+    st.markdown("A histogram is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. ")
+    
+    st.subheader("When to use Histogram")            
+    st.markdown("A histogram can be used to visualise distribution of a numeric data column. In case of non-numeric column, it helps to visualise count of each value.")
+    st.markdown("Ideal for : visualise occurence of an event, visualise data distriution")
     try:
-        x = st.sidebar.selectbox('Feature', options=numeric_columns)
+        x = st.sidebar.selectbox('Feature', options=all_columns)
         bin_size = st.sidebar.slider("Number of Bins", min_value=10,
-                                     max_value=100, value=40)
+                                     max_value=100, value=20)
         color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
         plot = px.histogram(x=x, data_frame=df, color=color_value)
         st.plotly_chart(plot)
@@ -233,6 +240,13 @@ if chart_select == 'Histogram':
         
 if chart_select == 'Funnel':
     st.sidebar.subheader("Funnel Settings")
+    st.subheader("Funnel Chart")
+    
+    st.markdown("A funnel chart is a specialized chart type that demonstrates the flow of data through different levels or tasks. The chart takes its name from its shape, which starts from a broad head and ends in a narrow neck")
+    
+    st.subheader("When to use Funnel chart")            
+    st.markdown("Funnel charts are most often seen in business or sales contexts, where we need to track how a starting set of visitors or users drop out of a process or flow. This chart type shows how the starting whole breaks down into progressive parts.")
+    st.markdown("Ideal for : web-traffic analysis, sales conversion")
     try:
         x = st.sidebar.selectbox('X axis', options=numeric_columns)
         y = st.sidebar.selectbox('Y axis', options=non_numeric_columns)
