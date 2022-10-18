@@ -257,6 +257,12 @@ if chart_select == 'Funnel':
 
 if chart_select == 'Boxplot':
     st.sidebar.subheader("Boxplot Settings")
+    st.subheader("Box Plot")
+   
+    st.markdown("Box plot represents statistical data on a plot in which a rectangle is drawn to represent the second and third quartiles, usually with a vertical line inside to indicate the median value. The lower and upper quartiles are shown as horizontal lines either side of the rectangle.")
+    st.subheader("When to use Box Plot")            
+    st.markdown("Box plots provide a visual summary of the data enabling researchers to quickly identify mean values, the dispersion of the data set, and signs of skewness.")
+    st.markdown("Ideal for : Identifying Inter-Quartile Ranges, Mean, Median and Outliers")
     try:
         y = st.sidebar.selectbox("Y axis", options=numeric_columns)
         x = st.sidebar.selectbox("X axis", options=all_columns)
@@ -267,7 +273,13 @@ if chart_select == 'Boxplot':
         print(e)
         
 if chart_select == 'Gantt':
-    st.sidebar.subheader("Funnel Settings")
+    st.sidebar.subheader("Gantt Chart Settings")
+    st.subheader("Gantt Chart")
+   
+    st.markdown("Gantt Chart is uses a series of horizontal lines shows the amount of work done or production completed in certain periods of time in relation to the amount planned for those periods.")
+    st.subheader("When to use Gantt Chart")            
+    st.markdown("Gantt charts are useful for planning and scheduling projects. They help you assess how long a project should take, determine the resources needed, and plan the order in which you'll complete tasks. They're also helpful for managing the dependencies between tasks.")
+    st.markdown("Ideal for : Project Management, Timeline overview")
     try:
         x_start = st.sidebar.selectbox('start date', options=all_columns)
         df[x_start] = pd.to_datetime(df[x_start])
