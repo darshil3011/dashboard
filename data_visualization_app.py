@@ -175,7 +175,7 @@ st.sidebar.subheader("Data visualisation")
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
-    options=['Select chart','Scatterplots', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
+    options=['Select chart','Scatterplots', 'Bar Graph', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
 )
 
 
