@@ -198,6 +198,26 @@ if chart_select == 'Scatterplots':
         st.plotly_chart(plot)
     except Exception as e:
         print(e)
+        
+if chart_select == 'Bar Graph':
+    st.sidebar.subheader("Bar Graph Settings")
+    st.subheader("Bar Graph")
+    
+    st.markdown("A line graph is a type of chart or graph that is used to show information that changes over time. A line graph can be plotted using several points connected by straight lines.")
+    
+    st.subheader("When to use Bargraph")            
+    st.markdown("A line plot can be used to visualise financial commodities or instruments and observe their trend over time function.")
+    st.markdown("Ideal for : Time-series analyses, comparison of two quantities")
+    
+    try:
+        x_values = st.sidebar.selectbox('X axis', options=all_columns)
+        y_values = st.sidebar.selectbox('Y axis', options=numeric_columns)
+        color_value = st.sidebar.selectbox("Color", options=non_numeric_columns)
+        #df = df.sort_values(by=y_values, ascending=True)
+        plot = px.bar(data_frame=df, x=x_values, y=y_values, color=color_value)
+        st.plotly_chart(plot)
+    except Exception as e:
+        print(e)
 
 if chart_select == 'Lineplots':
     st.sidebar.subheader("Line Plot Settings")
