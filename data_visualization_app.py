@@ -301,10 +301,10 @@ if chart_select == 'Gantt':
     st.markdown("Ideal for : Project Management, Timeline overview")
     try:
         x_start = st.sidebar.selectbox('Start date', options=all_columns)
-        df[x_start] = pd.to_datetime(df[x_start])
+        #df[x_start] = pd.to_datetime(df[x_start])
         
         x_end = st.sidebar.selectbox('End date', options=all_columns)
-        df[x_end] = pd.to_datetime(df[x_end])
+        #df[x_end] = pd.to_datetime(df[x_end])
         
         task = st.sidebar.selectbox('Tasks', options=all_columns)
         
@@ -313,26 +313,6 @@ if chart_select == 'Gantt':
     except Exception as e:
         print(e)
         
-if chart_select == 'Gantt 2':
-    st.sidebar.subheader("Gantt Chart Settings")
-    st.subheader("Gantt Chart")
-   
-    st.markdown("Gantt Chart is uses a series of horizontal lines shows the amount of work done or production completed in certain periods of time in relation to the amount planned for those periods.")
-    st.subheader("When to use Gantt Chart")            
-    st.markdown("Gantt charts are useful for planning and scheduling projects. They help you assess how long a project should take, determine the resources needed, and plan the order in which you'll complete tasks. They're also helpful for managing the dependencies between tasks.")
-    st.markdown("Ideal for : Project Management, Timeline overview")
-    try:
-        x_start = st.sidebar.selectbox('Start date', options=all_columns)
-        df[x_start] = pd.to_datetime(df[x_start])
-        
-        x_end = st.sidebar.selectbox('End date', options=all_columns)
-        df[x_end] = pd.to_datetime(df[x_end])
-        
-        task = st.sidebar.selectbox('Tasks', options=all_columns)
-        
-        plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
-        st.plotly_chart(plot)
-    except Exception as e:
-        print(e)
+
         
 st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
