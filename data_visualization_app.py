@@ -301,15 +301,17 @@ if chart_select == 'Gantt':
     st.markdown("Gantt charts are useful for planning and scheduling projects. They help you assess how long a project should take, determine the resources needed, and plan the order in which you'll complete tasks. They're also helpful for managing the dependencies between tasks.")
     st.markdown("Ideal for : Project Management, Timeline overview")
     try:
-        #x_start = st.sidebar.selectbox('Start date', options=all_columns)
-        #df[x_start] = pd.to_datetime(df[x_start])
+        x_start = st.sidebar.selectbox('Start date', options=all_columns)
+        df[x_start] = pd.to_datetime(df[x_start])
+        
         x_end = st.sidebar.selectbox('End date', options=all_columns)
         df[x_end] = pd.to_datetime(df[x_end])
+        
         task = st.sidebar.selectbox('Tasks', options=all_columns)
+        
         plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
         st.plotly_chart(plot)
     except Exception as e:
-        print('Error rasied in gant chart code')
         print(e)
         
-#st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
+st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
