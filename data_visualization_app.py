@@ -175,8 +175,7 @@ st.sidebar.subheader("Data visualisation")
 # add a select widget to the side bar
 chart_select = st.sidebar.selectbox(
     label="Select the chart type",
-    options=['Select chart','Scatterplots', 'Bar Graph', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt']
-)
+    options=['Select chart','Scatterplots', 'Bar Graph', 'Lineplots', 'Histogram', 'Funnel', 'Boxplot', 'Gantt', 'Gantt 2'])
 
 
 if chart_select == 'Scatterplots':
@@ -293,6 +292,28 @@ if chart_select == 'Boxplot':
         print(e)
         
 if chart_select == 'Gantt':
+    st.sidebar.subheader("Gantt Chart Settings")
+    st.subheader("Gantt Chart")
+   
+    st.markdown("Gantt Chart is uses a series of horizontal lines shows the amount of work done or production completed in certain periods of time in relation to the amount planned for those periods.")
+    st.subheader("When to use Gantt Chart")            
+    st.markdown("Gantt charts are useful for planning and scheduling projects. They help you assess how long a project should take, determine the resources needed, and plan the order in which you'll complete tasks. They're also helpful for managing the dependencies between tasks.")
+    st.markdown("Ideal for : Project Management, Timeline overview")
+    try:
+        x_start = st.sidebar.selectbox('Start date', options=all_columns)
+        df[x_start] = pd.to_datetime(df[x_start])
+        
+        x_end = st.sidebar.selectbox('End date', options=all_columns)
+        df[x_end] = pd.to_datetime(df[x_end])
+        
+        task = st.sidebar.selectbox('Tasks', options=all_columns)
+        
+        plot = px.timeline(df, x_start=x_start, x_end=x_end, y=task)
+        st.plotly_chart(plot)
+    except Exception as e:
+        print(e)
+        
+if chart_select == 'Gantt 2':
     st.sidebar.subheader("Gantt Chart Settings")
     st.subheader("Gantt Chart")
    
