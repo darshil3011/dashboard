@@ -312,4 +312,4 @@ if chart_select == 'Gantt':
         print('Error rasied in gant chart code')
         print(e)
         
-st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
+#st.sidebar.markdown('[Start Over](https://thinkingraphs.streamlitapp.com/)')
