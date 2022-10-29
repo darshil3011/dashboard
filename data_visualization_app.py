@@ -303,8 +303,8 @@ if chart_select == 'Gantt':
         x_start = st.sidebar.selectbox('Start date', options=all_columns)
         x_end = st.sidebar.selectbox('End date', options=all_columns)
         task = st.sidebar.selectbox('Tasks', options=all_columns)
-        df['start_date'] = pd.to_datetime(df[x_start])
-        df['end_date'] = pd.to_datetime(df[x_end])
+        df[x_start] = pd.to_datetime(df[x_start])
+        df[x_end] = pd.to_datetime(df[x_end])
         plot = px.timeline(df, x_start=start_date, x_end=end_date, y=task)
         st.plotly_chart(plot)
     except Exception as e:
