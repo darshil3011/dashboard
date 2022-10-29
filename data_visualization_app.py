@@ -301,13 +301,10 @@ if chart_select == 'Gantt':
     st.markdown("Ideal for : Project Management, Timeline overview")
     try:
         x_start = st.sidebar.selectbox('Start date', options=all_columns)
-        df['start_date'] = pd.to_datetime(df[x_start])
-        
         x_end = st.sidebar.selectbox('End date', options=all_columns)
-        df['end_date'] = pd.to_datetime(df[x_end])
-        
         task = st.sidebar.selectbox('Tasks', options=all_columns)
-        
+        df['start_date'] = pd.to_datetime(df[x_start])
+        df['end_date'] = pd.to_datetime(df[x_end])
         plot = px.timeline(df, x_start=start_date, x_end=end_date, y=task)
         st.plotly_chart(plot)
     except Exception as e:
