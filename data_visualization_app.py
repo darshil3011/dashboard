@@ -15,7 +15,7 @@ st.sidebar.subheader("Control Panel")
 
 placeholder = st.empty()
 image = Image.open('steps.png')
-placeholder.image(image)
+#placeholder.image(image)
 
 # Setup file upload
 uploaded_file = st.sidebar.file_uploader(
