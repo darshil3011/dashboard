@@ -31,20 +31,20 @@ if uploaded_file is not None:
         if len(df) > 1000:
             st.error('Dataframe less than 1000 rows are supported in free version. Dataframe will be automatically sliced to first 1000 rows. For premium version, contact www.thinkinbytes.in')
             df = df[0:1000]
+        global all_columns = list(df.columns)
+        global numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+        global non_numeric_columns = list(df.select_dtypes(['object']).columns)
+        global all_columns.insert(0, None)
+        global numeric_columns.insert(0, None)
+        global non_numeric_columns.insert(0, None)
     except Exception as e:
         st.error('Currently, we only support csv files. Please upload relevant file format !')
         df = pd.read_excel(uploaded_file)
 
-global numeric_columns
-global non_numeric_columns
-global all_columns
-global all_columns = []
-global all_columns = list(df.columns)
-global numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
-global non_numeric_columns = list(df.select_dtypes(['object']).columns)
-global all_columns.insert(0, None)
-global numeric_columns.insert(0, None)
-global non_numeric_columns.insert(0, None)
+#global numeric_columns
+#global non_numeric_columns
+#global all_columns
+
 
 
 
