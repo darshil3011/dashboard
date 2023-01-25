@@ -38,7 +38,13 @@ if uploaded_file is not None:
 global numeric_columns
 global non_numeric_columns
 global all_columns
-all_columns = []
+global all_columns = []
+global all_columns = list(df.columns)
+global numeric_columns = list(df.select_dtypes(['float', 'int']).columns)
+global non_numeric_columns = list(df.select_dtypes(['object']).columns)
+global all_columns.insert(0, None)
+global numeric_columns.insert(0, None)
+global non_numeric_columns.insert(0, None)
 
 
 
