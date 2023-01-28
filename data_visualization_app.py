@@ -101,8 +101,8 @@ try:
         
 
 except Exception as e:
-    st.write(e)
-    #st.write("Lets begin by uploading your data file (CSV). Different format ? [Convert Data to CSV](https://convertio.co/xlsx-csv/)")
+    #st.write(e)
+    st.write("Lets begin by uploading your data file (CSV). Different format ? [Convert Data to CSV](https://convertio.co/xlsx-csv/)")
 
 #Filter Data     
 st.sidebar.subheader("Filter data by conditions")
