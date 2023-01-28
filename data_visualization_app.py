@@ -82,7 +82,7 @@ try:
         numeric_columns.insert(0, None)
         non_numeric_columns.insert(0, None)
         date_column = st.sidebar.selectbox(label="Split date ?",options=non_numeric_columns)
-        df[date_column] = pd.to_datetime(df[date_column], format='%d/%m/%Y')
+        df[date_column] = pd.to_datetime(df[date_column], infer_datetime_format=True)
         df['month'] = pd.DatetimeIndex(df[date_column]).month
         df['year'] = pd.DatetimeIndex(df[date_column]).year
         df['day-date'] = pd.DatetimeIndex(df[date_column]).day
